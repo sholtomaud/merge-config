@@ -8,6 +8,23 @@ A lib to merge items provided on command line and config.json file. Assumes mini
 
 Because I needed a way to normalize command line switches and also provide an option to use a config file.
 
+## Install
+
+Currently this script is only hosted on GitHub so you install as follows:
+
+**npm**
+> npm install git+https://github.com/sholtomaud/merge-config.git
+
+**manual:** `package.json` 
+
+```json
+...
+"dependencies": {
+    "merge-config": "git+https://github.com/sholtomaud/merge-config.git#semver:^1.0.0"
+}
+...
+```
+
 ## How to use
 
 First, install the library in your project:
