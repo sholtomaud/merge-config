@@ -30,31 +30,34 @@ npm install git+https://github.com/sholtomaud/merge-config.git
 
 ## How to use
 
-You can use it in your script like this:
+This module is used to merge a configuration file against a JSON schema and merge it with command-line arguments.
+
+Here's an example of how to use it:
 
 ```js
-const mergeConfig = require('merge-config');
+const mergedConfig = require('merge-config');
 const minimist = require('minimist');
 
-// Parse command line arguments
+// Parse command-line arguments
 const argv = minimist(process.argv.slice(2));
 
-// Path to config file
-const configFile = './config.json';
-
-// Merge command line arguments and file config
-const config = mergeConfig(argv, configFile);
+// Merge configuration
+const config = mergedConfig('./config/config.json', './config/schema.json', argv, (error, config) => {
+    if (error) {
+        console.error('Error validating config:', error);
+    } else {
+        console.log('Validated and merged config:', config);
+    }
+});
 
 console.log(config);
 ```
 
-In this example, mergeConfig is used to merge the command line arguments (parsed by minimist) and the configuration loaded from a config.json file. The resulting config object contains the merged configuration.
+In this example, validateConfig is a function that takes four arguments:
 
-## Documentation
+1. The path to the configuration file (e.g., './config/config.json')
+2. The path to the JSON schema file (e.g., './config/schema.json')
+3. The command-line arguments parsed by minimist
+4. A callback function that takes two arguments: an error and the validated and merged configuration
 
-mergeConfig(argv, configFile)
-
-* argv: An object containing the parsed command line arguments. Typically, this is the result of minimist(process.argv.slice(2)).
-* configFile: A string containing the path to the configuration file.
-
-Returns: An object containing the merged configuration. If the same key exists in both argv and configFile, the value from argv is used.
+If the configuration is valid and successfully merged with the command-line arguments, the callback function will be called with null as the first argument and the merged configuration as the second argument. If there's an error, the callback function will be called with the error as the first argument.
