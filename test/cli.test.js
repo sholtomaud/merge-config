@@ -7,8 +7,9 @@ test('mergeConfig with cli args', function (t) {
     const argv = minimist(['--name', 'Test', '--version', '1.0.0']);
     delete argv._;
 
-    mergeConfig('./config/config.json', './config/schema.json', argv, (error, config) => {
-        t.error(error, 'No error');
+    try {
+        const config = mergeConfig('./config/config.json', './config/schema.json', argv);
+
         t.ok(config, 'Config returned');
 
         // Read the config file
@@ -16,7 +17,9 @@ test('mergeConfig with cli args', function (t) {
 
         // Check if the returned config matches the file config
         t.deepEqual(config, fileConfig, 'Returned config matches file config');
+    } catch (error) {
+        t.fail('Error thrown: ' + error.message);
+    }
 
-        t.end();
-    });
+    t.end();
 });

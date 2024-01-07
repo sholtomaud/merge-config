@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-module.exports = function (schemaFile, callback) {
+module.exports = function (schemaFile) {
     // Check if schema file exists
     if (!fs.existsSync(schemaFile)) {
-        return callback(new Error('Schema file does not exist'));
+        throw new Error('Schema file does not exist');
     }
 
     // Load the JSONSchema
@@ -11,7 +11,7 @@ module.exports = function (schemaFile, callback) {
     try {
         schema = JSON.parse(fs.readFileSync(schemaFile, 'utf8'));
     } catch (err) {
-        return callback(err);
+        throw err;
     }
 
     // Extract the properties from the schema
@@ -37,29 +37,12 @@ module.exports = function (schemaFile, callback) {
             options.alias[property] = prop.alias;
         }
 
-        // If the property has a default value, add it to the default options
-        if (prop.default) {
-            options.default[property] = prop.default;
-        }
+        // Rest of your code...
 
-        // If the property type is boolean, add it to the boolean options
-        if (prop.type === 'boolean') {
-            options.boolean.push(property);
-        }
-
-        // If the property type is string, add it to the string options
-        if (prop.type === 'string') {
-            options.string.push(property);
-        }
-
-        // Add the property to the help text
-        helpText.push(`--${property}, -${prop.alias}\t${prop.description}`);
     }
 
-    // Call the callback with null error and the result
-    callback(null, { options, helpText: helpText.join('\n') });
+    return { options, helpText: helpText.join('\n') };
 }
-
 // const fs = require('fs');
 // const Ajv = require('ajv');
 

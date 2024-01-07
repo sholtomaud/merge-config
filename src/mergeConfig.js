@@ -1,11 +1,10 @@
 const fs = require('fs');
 const Ajv = require('ajv');
 
-module.exports = function (configFile, schemaFile, argv, callback) {
+module.exports = function (configFile, schemaFile, argv) {
     // Check if files exist
     if (!fs.existsSync(configFile) || !fs.existsSync(schemaFile)) {
-        callback(new Error('Config file or schema file does not exist'));
-        return;
+        throw new Error('Config file or schema file does not exist');
     }
 
     // Load the config.json file
@@ -24,9 +23,8 @@ module.exports = function (configFile, schemaFile, argv, callback) {
     const isValid = ajv.validate(schema, mergedConfig);
 
     if (!isValid) {
-        callback(new Error('Merged config is not valid: ' + JSON.stringify(ajv.errors)));
-        return;
+        throw new Error('Merged config is not valid: ' + JSON.stringify(ajv.errors));
     }
 
-    callback(null, mergedConfig);
+    return mergedConfig;
 }
