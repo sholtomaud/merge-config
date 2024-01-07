@@ -27,13 +27,7 @@ Currently this script is only hosted on GitHub so you install as follows:
 
 ## How to use
 
-First, install the library in your project:
-
-```bash
-npm install --save merge-config
-```
-
-Then, you can use it in your script like this:
+You can use it in your script like this:
 
 ```js
 const mergeConfig = require('merge-config');
