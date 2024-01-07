@@ -13,7 +13,10 @@ Because I needed a way to normalize command line switches and also provide an op
 Currently this script is only hosted on GitHub so you install as follows:
 
 **npm**
-> npm install git+https://github.com/sholtomaud/merge-config.git
+
+```sh
+npm install git+https://github.com/sholtomaud/merge-config.git
+```
 
 **manual:** `package.json` 
 
