@@ -37,7 +37,24 @@ module.exports = function (schemaFile) {
             options.alias[property] = prop.alias;
         }
 
-        // Rest of your code...
+        // If the property has a default value, add it to the default options
+        if (prop.default) {
+            options.default[property] = prop.default;
+        }
+
+        // If the property type is boolean, add it to the boolean options
+        if (prop.type === 'boolean') {
+            options.boolean.push(property);
+        }
+
+        // If the property type is string, add it to the string options
+        if (prop.type === 'string') {
+            options.string.push(property);
+        }
+
+        // Add the property to the help text
+        helpText.push(`--${property}, -${prop.alias}\t${prop.description}`);
+
 
     }
 
