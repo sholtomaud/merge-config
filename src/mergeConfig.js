@@ -40,7 +40,7 @@ module.exports = function (configFile, schemaFile, argv) {
     if (!valid) {
         validate.errors.forEach(err => {
             if (err.keyword === 'enum') {
-                console.error(`Error: The value for ${err.instancePath.replace('/', '')} must be one of the following: ${err.params.allowedValues.join(', ')}`);
+                console.error(`\nError: The value for ${err.instancePath.replace('/', '')} must be one of the following: ${err.params.allowedValues.join(', ')}\n`);
             } else {
                 console.error(`Error: ${err.message}`);
             }
