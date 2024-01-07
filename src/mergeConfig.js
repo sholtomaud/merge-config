@@ -19,11 +19,20 @@ module.exports = function (configFile, schemaFile, argv) {
     // Create an instance of Ajv
     const ajv = new Ajv();
 
-    // Validate the merged config against the JSONSchema
-    const isValid = ajv.validate(schema, mergedConfig);
+    // Validate the data
+    const validate = ajv.compile(schema);
+    const valid = validate(mergedConfig);
 
-    if (!isValid) {
-        throw new Error('Merged config is not valid: ' + JSON.stringify(ajv.errors));
+    if (!valid) {
+        validate.errors.forEach(err => {
+            if (err.keyword === 'enum') {
+                console.error(`Error: The value for ${err.instancePath.replace('/', '')} must be one of the following: ${err.params.allowedValues.join(', ')}`);
+            } else {
+                console.error(`Error: ${err.message}`);
+            }
+        });
+
+        throw new Error('Merged config is not valid.');
     }
 
     return mergedConfig;
