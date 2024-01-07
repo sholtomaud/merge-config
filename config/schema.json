@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        }
+    },
+    "required": [
+        "name",
+        "version"
+    ]
+}
