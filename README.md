@@ -1,8 +1,10 @@
 # Merge Config
 
+> Assumes you are using minimist for cli options parsing.
+
 ## What?
 
-A lib to merge items provided on command line and config.json file. Assumes minimist is used.
+A lib to merge items provided on command line and config.json file. 
 
 ## Why?
 

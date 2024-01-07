@@ -1,6 +1,6 @@
 {
   "name": "merge-config",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A lib to merge items provided on command line and config.json file.",
   "main": "src/index.js",
   "scripts": {
