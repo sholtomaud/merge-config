@@ -1,14 +1,15 @@
 {
   "name": "merge-config",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A lib to merge items provided on command line and config.json file.",
   "main": "src/index.js",
   "scripts": {
     "test": "tape './test/**/*.test.js'",
     "tpl": "npm test && npm link",
     "patch": "npm version patch --no-git-tag-version && git add . && git commit -m 'Bump patch version'",
+    "push": "git push",
     "pr": "gh pr create --base main --head install -y",
-    "tppr": "npm run test && npm run patch && npm run pr"
+    "tpppr": "npm run test && npm run patch && npm run push && npm run pr"
   },
   "devDependencies": {
     "minimist": "^1.2.8",
