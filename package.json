@@ -1,10 +1,11 @@
 {
   "name": "merge-config",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "A lib to merge items provided on command line and config.json file.",
   "main": "src/index.js",
   "scripts": {
-    "test": "tape './test/**/*.test.js'",
+    "test": "jest",
+    "wtest": "jest --watch --coverage",
     "tpl": "npm test && npm link",
     "patch": "npm version patch --no-git-tag-version && git add . && git commit -m 'Bump patch version'",
     "push": "git push",
@@ -12,8 +13,8 @@
     "tpppr": "npm run test && npm run patch && npm run push && npm run pr"
   },
   "devDependencies": {
-    "minimist": "^1.2.8",
-    "tape": "^5.3.2"
+    "jest": "^29.7.0",
+    "minimist": "^1.2.8"
   },
   "keywords": [
     "config",
